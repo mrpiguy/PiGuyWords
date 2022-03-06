@@ -52,7 +52,7 @@ header {
   }
   
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 1000px) {
     .title-motto{
       margin-top:35px;
       margin-left:20px;

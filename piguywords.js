@@ -43,25 +43,29 @@ function remove_results(){
 
 function find_words(){
     const word_len = document.getElementById("word-len").value;
-    const extra_letters = removeDuplicateCharacters(document.getElementById("extra-words").value);
+    const extra_letters = removeDuplicateCharacters(document.getElementById("extra-words").value).toLowerCase();
     const num_extra_letters = extra_letters.length;
     var ancestor = document.getElementById('letter-boxes');
-    var descendents = ancestor.getElementsByTagName('*');
-    descendents = Array.prototype.slice.call(descendents);
+    var descendents = Array.prototype.slice.call(ancestor.getElementsByTagName('*')).map(element => {
+        return element.value.toLowerCase();
+      });
+    console.log(descendents)
     const n = words.length;
     var results = [];
     for(let i = 0;i<n;i++){
-        if(words[i].length == word_len){
-            if((descendents[0].value == "" || words[i][0] == descendents[0].value)
-            && (word_len < 2 ||descendents[1].value == "" || words[i][1] == descendents[1].value )
-            && (word_len < 3 ||descendents[2].value == "" || words[i][2] == descendents[2].value )
-            && (word_len < 4 ||descendents[3].value == "" || words[i][3] == descendents[3].value )
-            && (word_len < 5 ||descendents[4].value == "" || words[i][4] == descendents[4].value )
-            && (word_len < 6 ||descendents[5].value == "" || words[i][5] == descendents[5].value )
-            && (word_len < 7 ||descendents[6].value == "" || words[i][6] == descendents[6].value )
-            && (word_len < 8 ||descendents[7].value == "" || words[i][7] == descendents[7].value )
-            && (word_len < 9 ||descendents[8].value == "" || words[i][8] == descendents[8].value )
-            && (word_len < 10 ||descendents[9].value == "" || words[i][9] == descendents[9].value )
+        curr_word = words[i];
+        
+        if(curr_word.length == word_len){
+            if((descendents[0] == "" || curr_word[0] == descendents[0])
+            && (word_len < 2 ||descendents[1] == "" || curr_word[1] == descendents[1])
+            && (word_len < 3 ||descendents[2] == "" || curr_word[2] == descendents[2])
+            && (word_len < 4 ||descendents[3] == "" || curr_word[3] == descendents[3])
+            && (word_len < 5 ||descendents[4] == "" || curr_word[4] == descendents[4])
+            && (word_len < 6 ||descendents[5] == "" || curr_word[5] == descendents[5])
+            && (word_len < 7 ||descendents[6] == "" || curr_word[6] == descendents[6])
+            && (word_len < 8 ||descendents[7] == "" || curr_word[7] == descendents[7])
+            && (word_len < 9 ||descendents[8] == "" || curr_word[8] == descendents[8])
+            && (word_len < 10 ||descendents[9] == "" || curr_word[9] == descendents[9])
             ){
                 
                 var extras = 1;
@@ -70,14 +74,14 @@ function find_words(){
                     curr = extra_letters.charAt(j);
                    
                     if((/[a-zA-Z]/).test(curr)){
-                        if(!words[i].includes(curr)){
+                        if(!curr_word.includes(curr)){
                             extras = 0;
                             break;
                         } 
                     }
                 }
                 if(extras == 1){
-                    results.push(words[i])
+                    results.push(curr_word)
                 }
             }
             

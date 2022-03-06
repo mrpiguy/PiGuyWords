@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="piguywords.css">
+        <script src="words.js"></script>
+    </head>
+<header>
+    <a href='/'><img src="images/mrpiguy.png" class="main-logo"></a>
+    <div class="title-motto">
+        <div class="site-title">
+            <a href="/">Pi Guy Words!</a> 
+        </div>
+        <h1 class='motto'>A way to find your word puzzle words</h1>
+    </div>
+</header>
+<body>
+<h2>Instructions:</h2>
+<p>Define the number of letters in the word</p>
+<p>Add known letters into the small white boxes. Leave unknown places blank</p>
+<p>Add letters that are in word with uncertain place in the second text box</p>
+<p>Click Submit to get results</p>
+<br><br>
+<p>Enter length of word: <input type="number" min="1" max="10" class="word-len" id="word-len" value="5"></p>
+<br><br>
+    <div class="letter-boxes" id="letter-boxes">
+
+    </div>
+<br><p>Other letters somewhere in word: <input type="text" class="extra-words" id="extra-words" ></p><br>
+<br><button type="button" class="submit" id="submit">Submit</button> <br>
+<br><div class="results" id="results">
+
+</div>
+<script src="piguywords.js"></script>
+</body>
+</html>

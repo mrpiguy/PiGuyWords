@@ -43,8 +43,10 @@ function remove_results(){
 
 function find_words(){
     const word_len = document.getElementById("word-len").value;
-    const extra_letters = removeDuplicateCharacters(document.getElementById("extra-words").value).toLowerCase();
+    const extra_letters = removeDuplicateCharacters(document.getElementById("include").value).toLowerCase();
     const num_extra_letters = extra_letters.length;
+    const exclude = removeDuplicateCharacters(document.getElementById("exclude").value).toLowerCase();
+    const num_exclude = exclude.length
     var ancestor = document.getElementById('letter-boxes');
     var descendents = Array.prototype.slice.call(ancestor.getElementsByTagName('*')).map(element => {
         return element.value.toLowerCase();
@@ -80,6 +82,18 @@ function find_words(){
                         } 
                     }
                 }
+                if (extras==1){
+                    for(let k=0;k<num_exclude;k++){
+                        curr = exclude.charAt(k);
+                        if((/[a-zA-Z]/).test(curr)){
+                            if(curr_word.includes(curr)){
+                                extras = 0;
+                                break;
+                            } 
+                        }
+                    }
+                }
+                
                 if(extras == 1){
                     results.push(curr_word)
                 }

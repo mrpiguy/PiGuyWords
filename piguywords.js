@@ -7,6 +7,7 @@ document.getElementById('word-len').addEventListener('change', (event) => {
 
 document.getElementById('submit').addEventListener('click', (event) => {
     find_words()
+    document.getElementById('letter-boxes').scrollIntoView()
   });
 
 function remove_letters(){
@@ -51,7 +52,6 @@ function find_words(){
     var descendents = Array.prototype.slice.call(ancestor.getElementsByTagName('*')).map(element => {
         return element.value.toLowerCase();
       });
-    console.log(descendents)
     const n = words.length;
     var results = [];
     for(let i = 0;i<n;i++){

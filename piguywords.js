@@ -27,6 +27,11 @@ function add_letters(n){
 }
 function post_results(results){
     n = results.length;
+    const box = document.createElement("h3");
+    const node = document.createTextNode(String(n).concat(" Results"))
+    box.appendChild(node)
+    const element = document.getElementById("result-count");
+    element.appendChild(box);
     for(let i = 0;i<n;i++){
         const box = document.createElement("p");
         const node = document.createTextNode(results[i])
@@ -36,9 +41,14 @@ function post_results(results){
     }
 }
 function remove_results(){
-    const boxes = document.getElementById("results");
-    while (boxes.lastElementChild){
-        boxes.removeChild(boxes.lastElementChild)
+    const count_boxes = document.getElementById("result-count");
+    while (count_boxes.lastElementChild){
+        count_boxes.removeChild(count_boxes.lastElementChild)
+    }
+
+    const result_boxes = document.getElementById("results");
+    while (result_boxes.lastElementChild){
+        result_boxes.removeChild(result_boxes.lastElementChild)
     }
 }
 

@@ -51,6 +51,11 @@ header {
     text-align: center;
   }
   
+  .result-count{
+    text-align: center;
+    font-weight: bold;
+    
+  }
 
   @media screen and (min-width: 1000px) {
     .title-motto{

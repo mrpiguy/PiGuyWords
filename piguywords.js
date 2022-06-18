@@ -1,15 +1,25 @@
+//Defaults to 5 letter words
 add_letters(5);
-
+//Listens for when the length of word gets changed
 document.getElementById('word-len').addEventListener('change', (event) => {
   remove_letters();
   add_letters(event.target.value);
 });
-
+//Listens for submit button click. Calculates number of words that match the criteria
 document.getElementById('submit').addEventListener('click', (event) => {
-    find_words()
+    const words = find_words()
+    remove_results();
+    display_result_num(words);
+  });
+//Listens for when user clicks the 'show results' button
+document.getElementById('show-button').addEventListener('click', (event) => {
+    const words = find_words()
+    remove_results()
+    show_results(words)
     document.getElementById('letter-boxes').scrollIntoView()
   });
 
+//Clears letters from letter boxes
 function remove_letters(){
     const boxes = document.getElementById("letter-boxes");
     while (boxes.lastElementChild){
@@ -17,6 +27,7 @@ function remove_letters(){
     }
 }
 
+//Adds the appropriate number of boxes to add letters
 function add_letters(n){
     for(let i = 0;i<n;i++){
         const box = document.createElement("input");
@@ -25,13 +36,25 @@ function add_letters(n){
         element.appendChild(box);
     }
 }
-function post_results(results){
+
+//Displays the number of results
+function display_result_num(results){
     n = results.length;
     const box = document.createElement("h3");
     const node = document.createTextNode(String(n).concat(" Results"))
     box.appendChild(node)
     const element = document.getElementById("result-count");
     element.appendChild(box);
+    const element2 = document.getElementById("show-button")
+    const box2 = document.createElement("button")  
+    const node2 = document.createTextNode("Show Results")
+    box2.appendChild(node2)
+    element2.appendChild(box2)
+}
+
+//Shows the results
+function show_results(results){
+    //Lists all the words
     for(let i = 0;i<n;i++){
         const box = document.createElement("p");
         const node = document.createTextNode(results[i])
@@ -40,7 +63,14 @@ function post_results(results){
         element.appendChild(box);
     }
 }
+
+//Removes all the results from the screen
 function remove_results(){
+    //Removes the 'show-results' button
+    const button = document.getElementById("show-button")
+    while(button.lastElementChild){
+        button.removeChild(button.lastElementChild)
+    }
     const count_boxes = document.getElementById("result-count");
     while (count_boxes.lastElementChild){
         count_boxes.removeChild(count_boxes.lastElementChild)
@@ -52,6 +82,7 @@ function remove_results(){
     }
 }
 
+//Calculates an array of all the words that match the criteria
 function find_words(){
     const word_len = document.getElementById("word-len").value;
     const extra_letters = removeDuplicateCharacters(document.getElementById("include").value).toLowerCase();
@@ -115,10 +146,10 @@ function find_words(){
     if(results == []){
         results.push("No words match description");
     }
-    remove_results();
-    post_results(results);
+    return results
 }
 
+//Removes the duplicate characters from the include/exclude lists
 function removeDuplicateCharacters(string) {
     return string
       .split('')
